@@ -3,8 +3,14 @@ vowels = 'euioa'
 
 def halvesAreAlike(s: str) -> bool:
     one, two = s[:len(s)//2].lower(), s[len(s)//2:].lower()
+    return len([i for i in one if i in vowels]) == len([i for i in two if i in vowels])
+
+
+def halvesAreAlike1(s: str) -> bool:
+    one, two = s[:len(s)//2].lower(), s[len(s)//2:].lower()
 
     return countVowels(one) == countVowels(two)
+
 
 
 def countVowels(s: str) -> int:
