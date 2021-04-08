@@ -7,6 +7,7 @@ Note that 1 does not map to any letters.
 
 """
 from typing import List
+from itertools import product
 
 mapping = {2: 'abc', 
            3: 'def',
@@ -18,6 +19,14 @@ mapping = {2: 'abc',
            9: 'wxyz'}
 
 def letterCombinations(digits: str) -> List[str]:
+    if not digits:
+        return []
+    
+    return [''.join(s) for s in product(*map(lambda d: mapping[int(d)], digits))]
+
+
+
+def letterCombinations1(digits: str) -> List[str]:
     combs = []
     for digit in digits:
         letters = mapping[int(digit)]
@@ -31,7 +40,7 @@ def letterCombinations(digits: str) -> List[str]:
 
 def main():
     print(letterCombinations('23'))
-    assert letterCombinations('23') == ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+    assert set(letterCombinations('23')) == set(["ad","ae","af","bd","be","bf","cd","ce","cf"])
     assert letterCombinations('') == [], 'Empty input'
     assert letterCombinations('2') == ['a', 'b', 'c'], 'Single digit'
     print('All tests passed')
