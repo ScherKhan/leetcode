@@ -9,7 +9,44 @@ from typing import List
 from string import ascii_lowercase
 from itertools import zip_longest
 
+
 def isAlienSorted(words: List[str], order: str) -> bool:
+        # NO zip_longest solution
+
+        # prepate dictionary with mapping letter: order_index
+        letter_order = {l:i for i, l in enumerate(order)}
+        
+        i = 0
+        # compare all the pairs of the words if they are correct
+        while i < len(words) - 1:
+            word1 = words[i]
+            word2 = words[i+1]
+            
+            i += 1
+            # check every letter that it is in right order
+            for l1, l2 in zip(word1, word2):
+                if letter_order[l2] == letter_order[l1]:
+                    # if letters are the same that's fine
+                    continue
+                    
+                elif letter_order[l2] > letter_order[l1]:
+                    # if second word is higher don't need to check next letters
+                    break
+                else:
+                    # second word letter is smaller than first one
+                    # which is incorrect
+                    return False
+            
+            else:
+                # comparison of letters completed normally
+                if len(word2) < len(word1):
+                    # Second word shouldn't be shorter
+                    return False
+                
+        return True
+
+
+def isAlienSorted1(words: List[str], order: str) -> bool:
         # prepate dictionary with mapping letter: order_index
         letter_order = {l:i for i, l in enumerate(order)}
         
@@ -19,9 +56,9 @@ def isAlienSorted(words: List[str], order: str) -> bool:
         while i < len(words) - 1:
             word1 = words[i]
             word2 = words[i+1]
-            
+
             # check every letter that it is in right order
-            for l1, l2 in zip_longest(word1, word2):
+            for l1, l2 in zip(word1, word2):
                 # If second word is shorter than first one
                 if l2 is None:
                     return False
