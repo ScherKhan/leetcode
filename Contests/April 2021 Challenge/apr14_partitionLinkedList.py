@@ -15,9 +15,18 @@ class ListNode:
 
 
 def partition(head: ListNode, x: int) -> ListNode:
+    left, right = [], []
+    while head:
+        left.append(head.val) if head.val < x else right.append(head.val)
+        head = head.next
+    a = left + right
+    # reconstruct one-linked list
+    tail = None
+    for el in a[::-1]:
+        tail = ListNode(el, tail)
+        
+    return tail
     
-    return ListNode()
-
 
 def main():
     #Input: head = [1,4,3,2,5,2], x = 3
