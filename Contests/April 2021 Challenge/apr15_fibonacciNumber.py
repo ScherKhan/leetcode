@@ -11,7 +11,23 @@ import time
 
 def fib(n: int) -> int:
     if n in [0, 1]:
-            return n
+        return n
+
+    i = 2
+    f1, f2 = 1, 0
+    f = 0
+    while i <= n:
+        f = f2 + f1
+        f1, f2 = f, f1
+
+        i += 1
+
+    return f
+
+
+def fib1(n: int) -> int:
+    if n in [0, 1]:
+        return n
         
     return fib(n-1) + fib(n-2)
 
