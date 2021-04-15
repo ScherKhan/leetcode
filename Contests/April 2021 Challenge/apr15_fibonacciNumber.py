@@ -23,6 +23,8 @@ def main():
     assert fib(30) == 832040
     assert fib(15) == 610
     assert fib(4) == 3
+    assert fib(20) == 6765
+    assert fib(25) == 75025
     print(f'All tests passed. Took {time.time() - start_time:.3f} seconds')
 
 
